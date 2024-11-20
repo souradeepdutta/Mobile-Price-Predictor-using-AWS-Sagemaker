@@ -65,5 +65,9 @@ python app.py
 
 4. Click "Predict Price Range" to get the prediction
 
+## Screenshots
+
+![Smartphone Price Predictor Interface](./screenshot.png)
+*Smartphone Price Predictor Web Interface*
 
 
