@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smartphone Price Predictor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Previous styles remain unchanged */
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --background-color: #f8fafc;
+            --card-background: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --success-color: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .form-card {
+            background: var(--card-background);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            transition: border-color 0.15s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* New styles for checkboxes section */
+        .checkbox-section {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            cursor: pointer;
+        }
+
+        .checkbox-wrapper label {
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        .hidden-input {
+            display: none;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .result-card {
+            background: var(--card-background);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .result-image {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 2rem;
+            object-fit: contain;
+        }
+
+        .result-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .result-description {
+            color: var(--text-secondary);
+            max-width: 80%;
+            margin: 0 auto;
+        }
+
+        .form-columns {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-columns {
+                grid-template-columns: 1fr;
+            }
+
+            .checkbox-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Smartphone Price Predictor</h1>
+            <p class="subtitle">Enter your device specifications to predict its price range</p>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="form-card">
+                <form action="/" method="post" id="predictionForm">
+                    <div class="form-columns">
+                        <div class="form-group">
+                            <label for="battery_power">Battery Power</label>
+                            <input type="number" id="battery_power" name="battery_power" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="clock_speed">Clock Speed</label>
+                            <input type="number" step="0.1" id="clock_speed" name="clock_speed" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fc">Front Camera (MP)</label>
+                            <input type="number" id="fc" name="fc" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="int_memory">Internal Memory (GB)</label>
+                            <input type="number" id="int_memory" name="int_memory" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="m_dep">Mobile Depth (cm)</label>
+                            <input type="number" step="0.1" id="m_dep" name="m_dep" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mobile_wt">Mobile Weight (g)</label>
+                            <input type="number" id="mobile_wt" name="mobile_wt" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="n_cores">Number of Cores</label>
+                            <input type="number" id="n_cores" name="n_cores" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pc">Primary Camera (MP)</label>
+                            <input type="number" id="pc" name="pc" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="px_height">Pixel Height</label>
+                            <input type="number" id="px_height" name="px_height" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="px_width">Pixel Width</label>
+                            <input type="number" id="px_width" name="px_width" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ram">RAM (MB)</label>
+                            <input type="number" id="ram" name="ram" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sc_h">Screen Height (cm)</label>
+                            <input type="number" id="sc_h" name="sc_h" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sc_w">Screen Width (cm)</label>
+                            <input type="number" id="sc_w" name="sc_w" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="talk_time">Talk Time (hours)</label>
+                            <input type="number" id="talk_time" name="talk_time" required>
+                        </div>
+                    </div>
+
+                    <div class="checkbox-section">
+                        <h3 class="section-title">Device Features</h3>
+                        <div class="checkbox-grid">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="blue_checkbox">
+                                <label for="blue_checkbox">Bluetooth</label>
+                                <input type="hidden" id="blue" name="blue" value="0">
+                            </div>
+
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="dual_sim_checkbox">
+                                <label for="dual_sim_checkbox">Dual SIM</label>
+                                <input type="hidden" id="dual_sim" name="dual_sim" value="0">
+                            </div>
+
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="four_g_checkbox">
+                                <label for="four_g_checkbox">4G</label>
+                                <input type="hidden" id="four_g" name="four_g" value="0">
+                            </div>
+
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="three_g_checkbox">
+                                <label for="three_g_checkbox">3G</label>
+                                <input type="hidden" id="three_g" name="three_g" value="0">
+                            </div>
+
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="touch_screen_checkbox">
+                                <label for="touch_screen_checkbox">Touch Screen</label>
+                                <input type="hidden" id="touch_screen" name="touch_screen" value="0">
+                            </div>
+
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="wifi_checkbox">
+                                <label for="wifi_checkbox">WiFi</label>
+                                <input type="hidden" id="wifi" name="wifi" value="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Predict Price Range</button>
+                </form>
+            </div>
+
+            <div class="result-card">
+                {% if prediction %}
+                    <img src="{{ url_for('static', filename=prediction_image) }}" alt="Smartphone category" class="result-image">
+                    <h2 class="result-text">{{ prediction }}</h2>
+                    <p class="result-description">
+                        {% if prediction == "Budget mobile phone" %}
+                            Affordable smartphone with essential features for basic use.
+                        {% elif prediction == "Lower mid-range phone" %}
+                            Good value device with balanced features for everyday use.
+                        {% elif prediction == "Upper mid-range phone" %}
+                            Premium features and performance at a competitive price point.
+                        {% elif prediction == "Premium phone" %}
+                            Top-tier smartphone with cutting-edge features and performance.
+                        {% endif %}
+                    </p>
+                {% else %}
+                    <img src="{{ url_for('static', filename='placeholder.svg') }}" alt="Enter specifications" class="result-image">
+                    <p class="result-description">Enter your device specifications to see the prediction</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to update hidden input value when checkbox state changes
+        function setupCheckbox(checkboxId, hiddenInputId) {
+            const checkbox = document.getElementById(checkboxId);
+            const hiddenInput = document.getElementById(hiddenInputId);
+            
+            checkbox.addEventListener('change', function() {
+                hiddenInput.value = this.checked ? "1" : "0";
+            });
+        }
+
+        // Setup all checkboxes
+        const checkboxMappings = [
+            ['blue_checkbox', 'blue'],
+            ['dual_sim_checkbox', 'dual_sim'],
+            ['four_g_checkbox', 'four_g'],
+            ['three_g_checkbox', 'three_g'],
+            ['touch_screen_checkbox', 'touch_screen'],
+            ['wifi_checkbox', 'wifi']
+        ];
+
+        checkboxMappings.forEach(([checkboxId, hiddenInputId]) => {
+            setupCheckbox(checkboxId, hiddenInputId);
+        });
+    </script>
+</body>
+</html>
