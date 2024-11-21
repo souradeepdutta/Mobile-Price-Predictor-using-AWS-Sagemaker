@@ -70,4 +70,8 @@ python app.py
 ![Smartphone Price Predictor Interface](./screenshot.png)
 *Smartphone Price Predictor Web Interface*
 
+## Youtube Walkthrough
+[![Video Title](https://i9.ytimg.com/vi/WR_Yj6XPgUE/mqdefault.jpg?v=673f4725&sqp=CJiR_bkG&rs=AOn4CLA9-7Imam8C9CQmdiWG3mlI_7sSWg)](https://youtu.be/WR_Yj6XPgUE)
+
+
 
