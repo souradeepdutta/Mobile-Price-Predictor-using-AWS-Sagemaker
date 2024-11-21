@@ -71,7 +71,7 @@ python app.py
 *Smartphone Price Predictor Web Interface*
 
 ## Youtube Walkthrough
-[![Video Title](https://img.youtube.com/vi/WR_Yj6XPgUE/0.jpg)](https://www.youtube.com/watch?v=WR_Yj6XPgUE)
+[![Video Title](./static/AWS Project Thumbnail.png)](https://www.youtube.com/watch?v=WR_Yj6XPgUE)
 
 
 
