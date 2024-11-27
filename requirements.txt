@@ -1,0 +1,8 @@
+scikit-learn
+joblib
+boto3
+numpy
+pandas
+sagemaker
+argparse
+ipykernel
